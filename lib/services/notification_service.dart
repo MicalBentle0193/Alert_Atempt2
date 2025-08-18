@@ -12,7 +12,6 @@ class NotificationService {
       FlutterLocalNotificationsPlugin();
 
   Future<void> init() async {
-    const android = AndroidInitializationSettings('@mipmap/ic_launcher');
     final ios = DarwinInitializationSettings(
       requestSoundPermission: true,
       requestBadgePermission: true,
@@ -20,12 +19,15 @@ class NotificationService {
       onDidReceiveLocalNotification: _onDidReceiveLocalNotification,
     );
 
-    final settings = InitializationSettings(android: android, iOS: ios);
+    final settings = InitializationSettings(iOS: ios);
 
     tz.initializeTimeZones();
 
-    await _plugin.initialize(settings,
-        onDidReceiveNotificationResponse: _onSelectNotification);
+    await _plugin.initialize(
+      settings,
+      onDidReceiveNotificationResponse: _onSelectNotification,
+    );
+
     if (!kIsWeb) {
       await _requestPermissions();
     }
@@ -44,11 +46,11 @@ class NotificationService {
 
   static void _onDidReceiveLocalNotification(
       int id, String? title, String? body, String? payload) {
-    // iOS older versions: handle if needed
+    // Handle iOS <10 local notification if needed
   }
 
   void _onSelectNotification(NotificationResponse response) {
-    // handle tap if needed
+    // Handle notification tap
   }
 
   Future<void> showImmediate({
@@ -57,26 +59,13 @@ class NotificationService {
     int id = 0,
     String? payload,
   }) async {
-    const androidDetails = AndroidNotificationDetails(
-      'wynford_channel',
-      'Wynford Alerts',
-      channelDescription: 'Weather alerts and warnings',
-      importance: Importance.max,
-      priority: Priority.high,
-      color: AndroidColor(0xff000000),
-      visibility: NotificationVisibility.public,
-    );
-
     const iosDetails = DarwinNotificationDetails(
       presentAlert: true,
       presentBadge: true,
       presentSound: true,
     );
 
-    final platform = NotificationDetails(
-      android: androidDetails,
-      iOS: iosDetails,
-    );
+    final platform = NotificationDetails(iOS: iosDetails);
 
     await _plugin.show(id, title, body, platform, payload: payload);
   }
@@ -94,13 +83,15 @@ class NotificationService {
       body,
       tz.TZDateTime.from(scheduledDate, tz.local),
       const NotificationDetails(
-        android: AndroidNotificationDetails('wynford_channel',
-            'Wynford Alerts', channelDescription: 'Weather alerts and warnings'),
-        iOS: DarwinNotificationDetails(),
+        iOS: DarwinNotificationDetails(
+          presentAlert: true,
+          presentBadge: true,
+          presentSound: true,
+        ),
       ),
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.absoluteTime,
-      androidAllowWhileIdle: true,
+      androidAllowWhileIdle: false, // ignored on iOS
       payload: payload,
     );
   }
