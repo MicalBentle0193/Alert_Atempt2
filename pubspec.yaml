@@ -13,8 +13,9 @@ dependencies:
   cupertino_icons: ^1.0.2
   provider: ^6.0.5
   shared_preferences: ^2.0.15
-  flutter_local_notifications: ^13.0.0
+  flutter_local_notifications: ^17.2.1   # ✅ upgraded to latest stable
   uuid: ^3.0.7
+  intl: ^0.19.0                          # ✅ added for DateFormat
 
 dev_dependencies:
   flutter_test:
