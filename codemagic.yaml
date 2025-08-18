@@ -16,10 +16,10 @@ workflows:
           flutter pub get
       - name: Install certificate & provisioning profile
         script: |
-          # Copy certificate & provisioning profile from repository
-          cp ios/signing/certificate.p12 ~/certificate.p12
+          # Certificate and profile are in the root of the repo
+          cp certificate.p12 ~/certificate.p12
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-          cp ios/signing/profile.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
+          cp profile.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
           
           # Import certificate into keychain
           security import ~/certificate.p12 -k ~/Library/Keychains/login.keychain -P "$CERT_PASSWORD" -T /usr/bin/codesign
