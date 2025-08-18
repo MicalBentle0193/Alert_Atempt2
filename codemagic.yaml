@@ -1,24 +1,25 @@
 workflows:
-  ios-release-ipa:
-    name: iOS Release IPA Build
+  ios-workflow:
+    name: iOS build
     max_build_duration: 60
     environment:
       flutter: stable
       xcode: latest
       cocoapods: default
       vars:
-        BUNDLE_ID: "wynford.weather.mission"
-        APP_NAME: "Wynford Weather Alerts"
+        BUNDLE_ID: "com.yourcompany.alertapp"   # <- change this
+        APP_NAME: "Alert App"                   # <- change this
     scripts:
-      - name: Install Flutter dependencies
+      - name: Install dependencies
         script: |
           flutter pub get
-      - name: Build signed IPA for App Store/TestFlight
+      - name: Build iOS
         script: |
-          flutter build ipa --release
+          flutter build ios --release --no-codesign
     artifacts:
+      - build/ios/iphoneos/*.app
       - build/ios/ipa/*.ipa
     publishing:
       email:
         recipients:
-          - wynford0193@gmail.com   # Optional: replace with your email to get the IPA
+          - your@email.com   # <- change this
