@@ -1,24 +1,32 @@
 workflows:
-  ios-workflow:
-    name: iOS IPA build
+  ios-signed-workflow:
+    name: iOS Signed IPA Build
     max_build_duration: 60
     environment:
       flutter: stable
       xcode: latest
       cocoapods: default
       vars:
-        BUNDLE_ID: "com.yourcompany.alertapp"   # <- change this
-        APP_NAME: "Wynford Weather Alerts"      # <- change this
+        BUNDLE_ID: "wynford.weather.mission"       # <- replace with your app bundle ID
+        APP_NAME: "Wynford Weather Alerts"         # <- replace with your app name
     scripts:
       - name: Install dependencies
         script: |
           flutter pub get
-      - name: Build iOS release
+      - name: Build signed iOS IPA
         script: |
-          flutter build ipa --release --no-codesign
+          flutter build ipa --release
     artifacts:
       - build/ios/ipa/*.ipa
     publishing:
       email:
         recipients:
-          - your@email.com   # <- change this
+          - your@email.com  # <- replace with your email
+    ios:
+      code_signing:
+        distribution_certificate:
+          certificate_path: path/to/your_certificate.p12      # <- upload in Codemagic
+          certificate_password: $CERT_PASSWORD               # <- add as secret in Codemagic
+        provisioning_profile:
+          bundle_identifier: $BUNDLE_ID
+          profile_path: path/to/your_profile.mobileprovision   # <- upload in Codemagic
