@@ -13,9 +13,9 @@ dependencies:
   cupertino_icons: ^1.0.2
   provider: ^6.0.5
   shared_preferences: ^2.0.15
-  flutter_local_notifications: ^17.2.1   # ✅ upgraded to latest stable
+  flutter_local_notifications: ^17.2.1   # ✅ latest stable, works for iOS
   uuid: ^3.0.7
-  intl: ^0.19.0                          # ✅ added for DateFormat
+  intl: ^0.19.0                          # ✅ needed for DateFormat
 
 dev_dependencies:
   flutter_test:
@@ -26,5 +26,3 @@ flutter:
   uses-material-design: true
   assets:
     - assets/
-  # Keep app icon/defaults configured in Xcode for iOS
-  # No platform-specific package setup beyond Info.plist permission request for notifications
