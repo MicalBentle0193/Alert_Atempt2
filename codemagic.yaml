@@ -1,6 +1,6 @@
 workflows:
-  ios-codemagic-sign:
-    name: iOS Signed IPA Build
+  ios-release-ipa:
+    name: iOS Release IPA Build
     max_build_duration: 60
     environment:
       flutter: stable
@@ -10,11 +10,15 @@ workflows:
         BUNDLE_ID: "wynford.weather.mission"
         APP_NAME: "Wynford Weather Alerts"
     scripts:
-      - name: Install dependencies
+      - name: Install Flutter dependencies
         script: |
           flutter pub get
-      - name: Build signed IPA
+      - name: Build signed IPA for App Store/TestFlight
         script: |
-          flutter build ios --simulator
+          flutter build ipa --release
     artifacts:
       - build/ios/ipa/*.ipa
+    publishing:
+      email:
+        recipients:
+          - wynford0193@gmail.com   # Optional: replace with your email to get the IPA
