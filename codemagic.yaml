@@ -1,6 +1,6 @@
 workflows:
-  ios-signed-workflow:
-    name: iOS Signed IPA Build
+  ios-manual-sign-workflow:
+    name: iOS Manual Signed IPA Build
     max_build_duration: 60
     environment:
       flutter: stable
@@ -9,16 +9,22 @@ workflows:
       vars:
         BUNDLE_ID: "wynford.weather.mission"
         APP_NAME: "Wynford Weather Alerts"
+        CERT_PASSWORD: "1"
     scripts:
       - name: Install dependencies
         script: |
           flutter pub get
-      - name: Build signed iOS IPA
+      - name: Install certificate & provisioning profile
+        script: |
+          # Copy certificate & provisioning profile from repository
+          cp ios/signing/certificate.p12 ~/certificate.p12
+          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+          cp ios/signing/profile.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
+          
+          # Import certificate into keychain
+          security import ~/certificate.p12 -k ~/Library/Keychains/login.keychain -P "$CERT_PASSWORD" -T /usr/bin/codesign
+      - name: Build signed IPA
         script: |
           flutter build ipa --release
     artifacts:
       - build/ios/ipa/*.ipa
-    publishing:
-      email:
-        recipients:
-          - your@email.com  # <- replace with your email
