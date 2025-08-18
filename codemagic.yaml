@@ -1,6 +1,6 @@
 workflows:
-  ios-manual-sign-workflow:
-    name: iOS Manual Signed IPA Build
+  ios-codemagic-sign:
+    name: iOS Signed IPA Build
     max_build_duration: 60
     environment:
       flutter: stable
@@ -9,20 +9,10 @@ workflows:
       vars:
         BUNDLE_ID: "wynford.weather.mission"
         APP_NAME: "Wynford Weather Alerts"
-        CERT_PASSWORD: "1"
     scripts:
       - name: Install dependencies
         script: |
           flutter pub get
-      - name: Install certificate & provisioning profile
-        script: |
-          # Certificate and profile are in the root of the repo
-          cp certificate.p12 ~/certificate.p12
-          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-          cp profile.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
-          
-          # Import certificate into keychain
-          security import ~/certificate.p12 -k ~/Library/Keychains/login.keychain -P "$CERT_PASSWORD" -T /usr/bin/codesign
       - name: Build signed IPA
         script: |
           flutter build ipa --release
