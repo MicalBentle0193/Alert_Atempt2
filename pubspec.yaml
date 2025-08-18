@@ -23,7 +23,7 @@ dependencies:
 
   # Map (radar)
   flutter_map: ^4.0.0
-  latlong2: ^0.9.0
+  latlong2: 0.8.2
 
   # State & util
   provider: ^6.0.5
