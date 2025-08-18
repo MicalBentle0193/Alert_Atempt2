@@ -1,6 +1,6 @@
 workflows:
   ios-workflow:
-    name: iOS build
+    name: iOS IPA build
     max_build_duration: 60
     environment:
       flutter: stable
@@ -8,16 +8,15 @@ workflows:
       cocoapods: default
       vars:
         BUNDLE_ID: "com.yourcompany.alertapp"   # <- change this
-        APP_NAME: "Alert App"                   # <- change this
+        APP_NAME: "Wynford Weather Alerts"      # <- change this
     scripts:
       - name: Install dependencies
         script: |
           flutter pub get
-      - name: Build iOS
+      - name: Build iOS release
         script: |
-          flutter build ios --release --no-codesign
+          flutter build ipa --release --no-codesign
     artifacts:
-      - build/ios/iphoneos/*.app
       - build/ios/ipa/*.ipa
     publishing:
       email:
