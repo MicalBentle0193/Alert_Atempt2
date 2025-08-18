@@ -1,0 +1,4 @@
+# Placeholder file.
+# Replace this file with a real WAV file named scary_alert.wav.
+# For Android: also add the file to android/app/src/main/res/raw/scary_alert.wav
+# For iOS: add the file to the Runner project resources and bundle it.

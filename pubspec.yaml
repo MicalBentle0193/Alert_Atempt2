@@ -1,0 +1,46 @@
+name: wynford_weather_mission
+description: Wynford Weather Mission - secure weather alert system (Admin & Public).
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.5
+
+  # Firebase
+  firebase_core: ^2.7.0
+  firebase_auth: ^4.4.0
+  cloud_firestore: ^4.6.0
+  firebase_messaging: ^14.3.0
+
+  # Local notifications
+  flutter_local_notifications: ^13.0.0
+
+  # Map (radar)
+  flutter_map: ^4.0.0
+  latlong2: ^0.9.0
+
+  # State & util
+  provider: ^6.0.5
+  intl: ^0.18.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/sounds/scary_alert.wav
+    - assets/images/
+
+  # Add any fonts or images here
+  # Note: Add a real sound file at assets/sounds/scary_alert.wav before testing push with custom sound
+  # The placeholder file assets/sounds/scary_alert.wav exists as a text placeholder; replace with real wav.
