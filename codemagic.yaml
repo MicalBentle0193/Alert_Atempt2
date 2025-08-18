@@ -25,8 +25,8 @@ workflows:
     ios:
       code_signing:
         distribution_certificate:
-          certificate_path: path/to/your_certificate.p12      # <- upload in Codemagic
-          certificate_password: $CERT_PASSWORD               # <- add as secret in Codemagic
+          certificate_path: Certificate.p12      # <- upload in Codemagic
+          certificate_password: 1               # <- add as secret in Codemagic
         provisioning_profile:
           bundle_identifier: $BUNDLE_ID
-          profile_path: path/to/your_profile.mobileprovision   # <- upload in Codemagic
+          profile_path: Profile.mobileprovision   # <- upload in Codemagic
