@@ -1,22 +1,25 @@
 workflows:
-  android-unsigned:
-    name: Android Unsigned Build
+  ios-workflow:
+    name: iOS build
     max_build_duration: 60
     environment:
       flutter: stable
+      xcode: latest
+      cocoapods: default
       vars:
-        BUNDLE_ID: "wynford.weather.mission"
-        APP_NAME: "Wynford Weather Alerts"
+        BUNDLE_ID: "wynford.weather.mission"   # <- change this
+        APP_NAME: "Wynford Weather Alerts"                   # <- change this
     scripts:
       - name: Install dependencies
         script: |
           flutter pub get
-      - name: Build Android unsigned APK
+      - name: Build iOS
         script: |
-          flutter build apk --release
+          flutter build ios --release --no-codesign
     artifacts:
-      - build/app/outputs/flutter-apk/app-release.apk
+      - build/ios/iphoneos/*.app
+      - build/ios/ipa/*.ipa
     publishing:
       email:
         recipients:
-          - your@email.com
+          - your@email.com   # <- change this
