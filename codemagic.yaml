@@ -1,14 +1,18 @@
 workflows:
-  ios-workflow:
-    name: iOS build
-    max_build_duration: 60
+  build-all:
+    name: Build iOS & Android
+    max_build_duration: 120
     environment:
       flutter: stable
       xcode: latest
       cocoapods: default
+      android:
+        build_tools: "33.0.2"
+        ndk: "27.0.12077973"
       vars:
-        BUNDLE_ID: "wynford.weather.mission"   # <- change this
-        APP_NAME: "Wynford Weather Alerts"     # <- change this
+        APP_ID: "com.wynford.weather.mission"
+        BUNDLE_ID: "wynford.weather.mission"
+        APP_NAME: "Wynford Weather Alerts"
     scripts:
       - name: Install dependencies
         script: |
@@ -16,37 +20,16 @@ workflows:
       - name: Build iOS
         script: |
           flutter build ios --release --no-codesign
-    artifacts:
-      - build/ios/iphoneos/*.app
-      - build/ios/ipa/*.ipa
-    publishing:
-      email:
-        recipients:
-          - your@email.com   # <- change this
-
-  android-workflow:
-    name: Android build
-    max_build_duration: 60
-    environment:
-      flutter: stable
-      android:
-        build_tools: "33.0.2"        # specify your build tools version
-        ndk: "27.0.12077973"          # matches your local error log
-      vars:
-        APP_ID: "com.wynford.weather.mission"   # <- change this
-        APP_NAME: "Wynford Weather Alerts"      # <- change this
-    scripts:
-      - name: Install dependencies
-        script: |
-          flutter pub get
       - name: Build Android APK
         script: |
           flutter clean
           flutter pub get
           flutter build apk --release
     artifacts:
+      - build/ios/iphoneos/*.app
+      - build/ios/ipa/*.ipa
       - build/app/outputs/flutter-apk/app-release.apk
     publishing:
       email:
         recipients:
-          - your@email.com   # <- change this
+          - your@email.com
