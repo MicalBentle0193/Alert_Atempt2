@@ -5,18 +5,18 @@ workflows:
     environment:
       flutter: stable
       vars:
-        BUNDLE_ID: "wynford.weather.mission"   # <- change if needed
-        APP_NAME: "Wynford Weather Alerts"     # <- change if needed
+        BUNDLE_ID: "wynford.weather.mission"
+        APP_NAME: "Wynford Weather Alerts"
     scripts:
       - name: Install dependencies
         script: |
           flutter pub get
       - name: Build Android unsigned APK
         script: |
-          flutter build apk --release --no-shrink --no-sign
+          flutter build apk --release
     artifacts:
       - build/app/outputs/flutter-apk/app-release.apk
     publishing:
       email:
         recipients:
-          - your@email.com   # <- change this
+          - your@email.com
