@@ -7,8 +7,8 @@ workflows:
       xcode: latest
       cocoapods: default
       vars:
-        BUNDLE_ID: "wynford.weather.mission"   # your bundle ID
-        APP_NAME: "Wynford Weather Alerts"     # your app name
+        BUNDLE_ID: "wynford.weather.mission"
+        APP_NAME: "Wynford Weather Alerts"
     scripts:
       - name: Install dependencies
         script: |
@@ -26,6 +26,4 @@ workflows:
     publishing:
       email:
         recipients:
-          - your@email.com   # change this
-        on_success: always
-        on_failure: always
+          - your@email.com
