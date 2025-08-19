@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "337470919030",
+    "firebase_url": "https://wynford-weather-alerts-default-rtdb.firebaseio.com",
+    "project_id": "wynford-weather-alerts",
+    "storage_bucket": "wynford-weather-alerts.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:337470919030:android:0345307e605ca003f5aa57",
+        "android_client_info": {
+          "package_name": "wynford.weather.mission"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCB3ISxSZz6m724vfYKfgYnW7UK_V4yOfw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
