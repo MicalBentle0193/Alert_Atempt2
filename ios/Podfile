@@ -1,0 +1,29 @@
+# Uncomment this line to define a global platform for your project
+platform :ios, '12.0'
+
+# CocoaPods require_frameworks for Flutter plugins
+use_frameworks!
+use_modular_headers!
+
+# Your main target
+target 'Runner' do
+  # Flutter Pods
+  flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
+
+  # Firebase Pods
+  pod 'Firebase/Core'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Messaging'
+  pod 'Firebase/Firestore'
+
+  # Flutter Local Notifications
+  pod 'FlutterLocalNotificationsPlugin', :path => '../.symlinks/plugins/flutter_local_notifications/ios'
+
+end
+
+# Prevent CocoaPods from building all pods for all targets at once
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    flutter_additional_ios_build_settings(target)
+  end
+end
